@@ -1,0 +1,31 @@
+{
+	"phpcs.enable": true,
+	"phpcs.standard": "${workspaceRoot}/phpcs.xml", // コード規約は独自ファイルにする
+	"phpcs.executablePath": "./vendor/bin/phpcs",
+	"phpcbf.enable": true,
+	"phpcbf.onsave": true,
+	"phpcbf.debug": false,
+	"phpcbf.standard": "WordPress",
+	"phpcbf.executablePath": "./vendor/bin/phpcbf",
+	"phpcbf.documentFormattingProvider": true,
+
+	"[html]": {
+		"editor.formatOnSave": true
+	},
+	"[css]": {
+		"editor.formatOnSave": true
+	},
+	"[scss]": {
+		"editor.formatOnSave": true
+	},
+	"[javascript]": {
+		"editor.formatOnSave": true
+	},
+	"[json]": {
+		"editor.formatOnSave": true
+	},
+	"[php]": {
+		"editor.formatOnSave": false,
+		"editor.formatOnPaste": false
+	}
+}
