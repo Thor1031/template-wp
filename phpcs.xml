@@ -4,8 +4,6 @@
 		<description>Custom ruleset Based on WordPress</description>
 
 		<!-- PHP_CodeSnifferにWordPress標準へのパスを指定 -->
-		<!-- これがないとWordPress規約でのコードチェックできない -->
-		<config name="installed_paths" value="vendor/wp-coding-standards/wpcs" />
 		<!-- <config name="installed_paths" value="/Users/makiyasu/Dropbox/test-phpcs/vendor/wp-coding-standards/wpcs" /> -->
 
 		<!-- Default tab width for indentation fixes and such. -->
@@ -14,6 +12,7 @@
 		<!-- チェックをしないファイル -->
 		<exclude-pattern>*/node_modules/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>.vscode/*</exclude-pattern>
 
 		<!-- WordPressのコード基準をベースにする -->
 		<rule ref="WordPress">
