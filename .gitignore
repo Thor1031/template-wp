@@ -10,3 +10,5 @@ node_modules/
 *.log
 img/.gitkeep
 img/base/
+
+package-lock.json
