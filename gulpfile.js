@@ -1,3 +1,5 @@
+
+require("es6-promise").polyfill();
 var { src, dest, task, watch, series } = require( 'gulp' );
 var sass = require( 'gulp-sass' );
 var plumber = require( 'gulp-plumber' );
@@ -5,6 +7,7 @@ var notify = require( 'gulp-notify' );
 var sassGlob = require( 'gulp-sass-glob' );
 var mmq = require( 'gulp-merge-media-queries' );
 var browserSync = require( 'browser-sync' );
+var reload = browserSync.reload;
 
 var imagemin = require( 'gulp-imagemin' );
 var imageminPngquant = require( 'imagemin-pngquant' );
@@ -22,17 +25,6 @@ var fs = require('fs');
 var concat = require("gulp-concat");
 // var merge = require('merge-stream');
 
-// task
-var tk_phpfile = "create-phpfiles";
-var tk_newfile = "new-file";
-var tk_themename = "themename";
-var tk_server = 'build-server';
-var tk_reload = 'browser-reload';
-var tk_watch = 'watch-files';
-
-// 各種settings
-var liveview = false; // serverを立ち上げるか否か
-
 var banner = [
   '/*',
   ' Theme Name: sample1',
@@ -40,6 +32,7 @@ var banner = [
   ''
 ].join('\n\n');
 
+// 画像圧縮のオプション設定
 var imageminOption = [
   imageminPngquant({ quality: '65-80' }),
   imageminMozjpeg({ quality: 85 }),
@@ -54,43 +47,41 @@ var imageminOption = [
   imagemin.svgo() // svg　圧縮
 ];
 
-// sassコンパイルタスク
-task( 'sass', function() {
-  return src('./sass/**/*.scss') // watchをエラーで中断させないようにする
-    .pipe(plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })) // import時に setting/** のような記述ができる
-    .pipe(sassGlob()) // css変換処理と、出力フォーマット形式の指定
-    .pipe(sass({ outputStyle: 'expanded' })) // ベンダープレフィックスを自動で付与してくれる
-    .pipe(postcss([autoprefixer()])) // プロパティをソートし直してくれる, ここではアルファベット順
-    .pipe(postcss([cssdeclsort({ order: 'alphabetically' })])) // バラバラに記載されているメディアクエリを1つにまとめてくれる
-    .pipe(mmq())
-    .pipe(dest('./css'));
-});
-
-task('watch', function () {
-	watch('./sass/**/*.scss', series('sass', 'bs-reload'));
-});
-
-task('browser-sync', function () {
-	browserSync.init({
-		proxy: 'template.local'
-	});
-});
-
-task('bs-reload', function () {
-	browserSync.reload();
-});
-
-task('default', series("browser-sync", 'watch'), function () {
-	watch('./*.php', task('bs-reload'));
-	watch('./css/*.css', task('bs-reload'));
-	watch('./js/*.js', task('bs-reload'));
-});
-
-// imagemin 画像圧縮処理
+// 画像圧縮処理
 task('imagemin', function () {
-	return src('./img/**/*') // タスクの対象となるファイル
+	return src("./img/**/*")
+		.pipe(plumber({ errorHandler: notify.onError("Error: <%= error.message %>") })) // gulp中断を防ぐ
 		.pipe(imagemin(imageminOption))
-		.pipe(dest('./img')); // 出力先
+		.pipe(dest("./img"));
+});
+
+// sassのコンパイル
+task( 'sass', function() {
+  return src("./sass/**/*.scss")
+		.pipe(plumber({ errorHandler: notify.onError("Error: <%= error.message %>") })) // gulp中断を防ぐ
+		.pipe(sassGlob()) // import時にsetting/** のような記述ができる
+		.pipe(sass({ outputStyle: "expanded" })) // css変換処理と、出力フォーマット形式の指定
+		.pipe(postcss([autoprefixer()])) // ベンダープレフィックスを追加
+		.pipe(postcss([cssdeclsort({ order: "alphabetically" })])) // プロパティをアルファベット順でソート
+		.pipe(mmq()) // バラバラに記載されているメディアクエリを1つにまとめてくれる
+		.pipe(dest("./css")); // cssフォルダに出力
+});
+
+// ファイルの監視
+task('watch', function () {
+	browserSync.init({
+		files: ["./**/*.php"],
+		proxy: "template.local"
+	});
+	watch('./sass/**/*.scss', series('sass', reload));
+	watch('./img/**/*', series("imagemin", reload));
+});
+
+// デフォルトタスク
+task('default', series('watch'), function () {
+	watch('./*.php', task(reload));
+	watch('./css/*.css', task(reload));
+	watch('./js/*.js', task(reload));
 });
 
 // サーバーの立ち上げ

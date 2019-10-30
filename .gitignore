@@ -7,9 +7,9 @@ vendor/
 *.sass.map
 *.scss.map
 node_modules/
-package-lock.json
 
 *.log
 img/.gitkeep
 img/base/
 
+package-lock.json
