@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no">
-<link rel="stylesheet" href="./css/style.css">
+<!-- <link rel="stylesheet" href="./css/style.css"> -->
 <link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1/slick/slick.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1/slick/slick-theme.min.css">
@@ -194,7 +194,7 @@
 		});
 	});
 </script>
-<script src="./js/script.js"></script>
+<!-- <script src="./js/script.js"></script> -->
 
 <?php wp_footer(); ?>
 </body>
