@@ -5,6 +5,7 @@ var notify = require("gulp-notify");
 var sassGlob = require("gulp-sass-glob");
 var mmq = require("gulp-merge-media-queries");
 var browserSync = require("browser-sync");
+var reload = browserSync.reload;
 
 var imagemin = require("gulp-imagemin");
 var imageminPngquant = require("imagemin-pngquant");
@@ -14,11 +15,12 @@ var postcss = require("gulp-postcss");
 var autoprefixer = require("autoprefixer");
 var cssdeclsort = require("css-declaration-sorter");
 
-// var ejs = require("gulp-ejs");
-// var rename = require("gulp-rename");
-// var replace = require("gulp-replace");
+// var ejs = require( 'gulp-ejs' );
+// var rename = require( 'gulp-rename' );
+// var replace = require('gulp-replace');
 // var header = require('gulp-header');
-// var fs = require("fs");
+// var fs = require('fs');
+// var merge = require('merge-stream');
 
 // 画像圧縮のオプション設定
 var imageminOption = [
@@ -60,9 +62,10 @@ task("sass", function() {
 task("watch", function(done) {
 	browserSync.init({
 		files: ["./**/*.php"],
-		proxy: "http://sample.local/"
+		proxy: "http://sample.wp/",
+		open: true, // Gulp起動時にproxyで設定したURLのサイトを自動的に開くことを許可
+		reloadDelay: 2000　// リロードに2秒Delay
 	});
-	// watch('./sass/**/*.scss', series('sass', "bs-reload"));
 	watch("./sass/**/*.scss", series("sass"));
 	watch("./js/*.js", task("bs-reload"));
 	watch("./css/*.css", task("bs-reload"));
@@ -76,6 +79,7 @@ task("watch", function(done) {
 // 	});
 // });
 
+// ブラウザのリロード
 task("bs-reload", function(done) {
 	browserSync.reload();
 	done();
