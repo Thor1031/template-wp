@@ -15,11 +15,11 @@ var postcss = require("gulp-postcss");
 var autoprefixer = require("autoprefixer");
 var cssdeclsort = require("css-declaration-sorter");
 
-var ejs = require("gulp-ejs");
-var rename = require("gulp-rename");
-var replace = require("gulp-replace");
+// var ejs = require( 'gulp-ejs' );
+// var rename = require( 'gulp-rename' );
+// var replace = require('gulp-replace');
 // var header = require('gulp-header');
-var fs = require("fs");
+// var fs = require('fs');
 // var merge = require('merge-stream');
 
 // 画像圧縮のオプション設定
@@ -59,102 +59,33 @@ task("sass", function() {
 });
 
 // ファイルの監視
-task("watch", function() {
-	// browserSync.init({
-	// 	files: ["./**/*.php"],
-	// 	proxy: "template.local"
-	// });
-	watch("./sass/**/*.scss", series("sass", "bs-reload"));
-	// watch('./img/**/*', series("imagemin", "bs-reload"));
-});
-
-task("browser-sync", function() {
+task("watch", function(done) {
 	browserSync.init({
-		proxy: "http://sample.local/"
+		files: ["./**/*.php"],
+		proxy: "http://sample.wp/",
+		open: true, // Gulp起動時にproxyで設定したURLのサイトを自動的に開くことを許可
+		reloadDelay: 2000　// リロードに2秒Delay
 	});
-});
-
-task("bs-reload", function() {
-	browserSync.reload();
-});
-
-// デフォルトタスク
-task("default", series("watch"), function() {
-	watch("./*.php", task("bs-reload"));
-	watch("./css/*.css", task("bs-reload"));
+	watch("./sass/**/*.scss", series("sass"));
 	watch("./js/*.js", task("bs-reload"));
+	watch("./css/*.css", task("bs-reload"));
+	// watch('./img/**/*', series("imagemin", "bs-reload"));
+	done();
 });
 
-// サーバーの立ち上げ
-// task(tk_server, function (done) {
-//   if (liveview == true) {
-//     browserSync.init({
-//       // server: {
-//       //   baseDir: "./",
-//       //   index: 'index.html'
-// 			// }
-// 			proxy: "template.local"
-//     });
-//   }
-// 	done();
-// });
-
-//　監視ファイルを指定
-// task(tk_watch, function (done) {
-//   watch('./sass/**/*.scss', task('sass'));
-//   // watch("./*.html", task(tk_reload));
-//   watch("./css/*.css", task(tk_reload));
-//   watch("./js/*.js", task(tk_reload));
-//   done();
+// task("browser-sync", function() {
+// 	browserSync.init({
+// 		proxy: "http://sample.local/"
+// 	});
 // });
 
 // ブラウザのリロード
-// task(tk_reload, function (done) {
-//   if (liveview == true) {
-//     browserSync.reload();
-//   }
-// 	done();
-// });
+task("bs-reload", function(done) {
+	browserSync.reload();
+	done();
+});
 
-// phpファイル群作成
-// task(tk_phpfile, function (done) {
-//   fs.stat("./index.php", function (err, stat) {
-//     // index.phpがすでに存在するとき
-//     if (err == null) {
-//       return false; // これによってこれ以降のdefaultタスクは実行されない
-//     }
-//     // index.phpがまだ存在しないとき
-//     if (err.code == "ENOENT") {
-//       var data = ["home", "header"];
-
-//       src("./index.html")
-//         .pipe(rename(function (path) { path.extname = ".php"; }))
-//         .pipe(replace("./css/style.css", "<?php  echo get_template_directory_uri(); ?>/css/style.css"))
-//         .pipe(replace('<img src=".', '<img src="<?php echo get_template_directory_uri(); ?>'))
-//         .pipe(dest("./"))
-//         .pipe(rename("home.php")).pipe(dest("./"))
-//         .pipe(rename("header.php")).pipe(dest("./"))
-//         .pipe(rename("footer.php")).pipe(dest("./"));
-//       done();
-//     }
-//   });
-// });
-
-// wordpressテーマ名の付与
-// task(tk_themename, function (done) {
-//   src("./css/style.css")
-//     .pipe(header(banner))
-//     .pipe(dest("./css/"));
-//   done();
-// });
-
-// タスクの実行
-// task('default',
-//   series(
-//     tk_server,
-//     tk_watch,
-//     tk_phpfile,
-//     tk_themename,
-//     function (done) {
-//   done();
-// }));
+// デフォルトタスク
+task("default", series("watch"), function(done) {
+	done();
+});

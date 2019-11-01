@@ -12,4 +12,4 @@ node_modules/
 img/.gitkeep
 img/base/
 
-package-lock.json
+# package-lock.json

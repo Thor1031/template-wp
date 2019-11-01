@@ -39,5 +39,7 @@
 			<exclude name="Squiz.Commenting.FunctionComment.Missing" />
 			<!-- スペースでWARNINGを出さない -->
 			<exclude name="WordPress.WhiteSpace.PrecisionAlignment.Found" />
+			<!-- wp_enqueue_style()などでverを省略することを許可 -->
+			<exclude name="WordPress.WP.EnqueuedResourceParameters.MissingVersion" />
 		</rule>
 </ruleset>
