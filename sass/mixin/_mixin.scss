@@ -1,0 +1,69 @@
+// メディアクエリー
+@mixin mq($breakpoint: sp) {
+
+	@media #{map-get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}
+
+// float 解除
+@mixin clearfix {
+
+	&::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+}
+
+// ul, olの初期化
+@mixin linit {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+// 割り算
+@function division($size, $size2) {
+
+	@return $size / $size2;
+}
+
+// fontawesome 適用　
+@mixin f-awesome($content) {
+	content: $content;
+	font-family: $ff-awesome;
+	font-weight: 900;
+}
+
+@mixin flex-container($jc: space-around, $col-bp: null) {
+	display: flex;
+	justify-content: $jc;
+	align-items: center;
+
+	@if $col-bp != null {
+		@include mq($col-bp) {
+		  flex-direction: column;
+		}
+	}
+}
+
+@mixin basebox($height: null, $pt: 40px, $pb: 40px, $pt_sp: $pt, $pb_sp: $pb) {
+	padding: {
+		top: $pt;
+		bottom: $pb;
+		// top: if($pt == null, 0, $pt);
+		// bottom: if($pb == null, 0, $pb);
+	}
+	@if $height != null {
+		height: $height
+	}
+	// height: if($height == null, initial, $height);
+
+	@if $pt_sp != $pt or $pb_sp != $pb {
+		@include mq('sp') {
+			top: $pt_sp;
+			bottom: $pb_sp;
+		}
+	}
+}
