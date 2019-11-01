@@ -1,0 +1,50 @@
+$height-mv: 500px;
+
+.mv {
+	// background-image: printurl("main.jpg");
+	// background-size: cover;
+	// background-repeat: no-repeat;
+	// background-position: center;
+	@include basebox;
+	margin-top: $header-height;
+	height: $height-mv;
+
+	@include mq("sp") {
+		margin-top: $header-height-sp;
+		height: $height-mv * 0.8;
+	}
+
+	> .inner {
+		text-align: center;
+
+		@include mq("tab") {
+			// max-width: $layout-width-inner - 300px;
+		}
+
+		@include mq("tab-sm") {
+			// padding: 0;
+			// max-width: 100%;
+		}
+	}
+}
+
+.catchcopy {
+}
+
+.slider-img {
+	width: 100%;
+}
+
+.slider-img.pc {
+	@include mq("sp") {
+		display: none;
+	}
+}
+
+.slider-img.sp {
+	display: none;
+
+	@include mq("sp") {
+		display: block;
+	}
+}

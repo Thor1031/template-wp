@@ -1,0 +1,4 @@
+$imagesPath: "../img/";
+@function printurl($fileName) {
+  @return url($imagesPath + $fileName);
+}

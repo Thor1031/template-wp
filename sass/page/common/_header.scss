@@ -1,0 +1,95 @@
+
+$bc-header: #fff;
+$bc-header-btn: #da6b64;
+$width-logo: 200px;
+$width-nav: 70%;
+
+.gheader {
+	position: fixed;
+	width: 100%;
+	background: $bc-header;
+	top: 0;
+	left: 0;
+	box-shadow: 0 1px 3px rgba(#000, 0.16);
+	z-index: map-get($layer, "header");
+
+	> .inner {
+		@include flex-container(flex-start);
+		padding: 0 16px;
+		height: $header-height;
+		min-width: $layout-width-header-inner;
+	}
+
+	@include mq("tab-head") {
+		display: none;
+	}
+
+	@include mq('sp') {
+		height: $header-height-sp;
+	}
+}
+
+.header-logo {
+	margin-right: auto;
+	margin-bottom: 0;
+	text-decoration: none;
+
+	a {
+		transition: all 0.3s ease 0s;
+		display: inline-block;
+
+		&:hover {
+			opacity: $opacity;
+		}
+
+		img {
+			width: $width-logo;
+		}
+	}
+
+	.subttl {
+	}
+}
+
+.header-nav {
+	width: $width-nav;
+	margin-right: 20px;
+
+	@include mq("sp") {
+		display: none;
+	}
+
+	ul {
+		font-size: 0;
+		@include flex-container(space-evenly);
+	}
+
+	li {
+		margin-right: 16px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+
+		> a {
+			text-decoration: none;
+			color: $cr-txt;
+			display: block;
+			font-size: 16px;
+			transition: all 0.3s ease 0s;
+			padding: .5rem;
+
+			&:hover {
+				opacity: $opacity;
+			}
+		}
+	}
+}
+
+button.header-btn {
+	padding: 11px 40px;
+	background-color: $bc-header-btn;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}

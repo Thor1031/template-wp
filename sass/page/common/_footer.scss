@@ -1,0 +1,68 @@
+
+$footer-cnt-bc: #4F4C4D;
+$footer-cnt-c: #fff;
+$footer-cnt-pd: 48px;
+$footer-btm-bc: #fff;
+$footer-btm-c: #fff;
+$copy-c: #969696;
+$footer-btm-pd: 32px;
+
+.gfooter {
+
+}
+
+.gfooter-contents {
+	background-color: $footer-cnt-bc;
+	color: $footer-cnt-c;
+	@include basebox(
+		$pt: $footer-cnt-pd,
+		$pb: $footer-cnt-pd
+	);
+
+	> .inner {
+	}
+
+	a {
+		text-decoration: none;
+	}
+}
+
+.f-menu.inner {
+		@include flex-container(space-between);
+
+		dl {
+			margin-bottom: 1rem;
+		}
+
+		dt {
+			font-size: 0.73rem;
+		}
+
+		.f-grid-bx {
+			display: grid;
+			gap: 0.7rem 3rem;
+
+		}
+}
+
+.gfooter-bottom {
+	background-color: $footer-btm-bc;
+	color: $footer-btm-c;
+
+	@include basebox(
+		$pt: $footer-btm-pd,
+		$pb: $footer-btm-pd
+	);
+
+	> .inner {
+		@include flex-container(space-around);
+	}
+
+	p.copy {
+		color: $copy-c;
+
+		small {
+			font-size: inherit;
+		}
+	}
+}
