@@ -8,6 +8,7 @@
 	"phpcbf.standard": "WordPress",
 	"phpcbf.executablePath": "./vendor/bin/phpcbf",
 	"phpcbf.documentFormattingProvider": true,
+	"eslint.autoFixOnSave": true,
 
 	"[html]": {
 		"editor.formatOnSave": true
