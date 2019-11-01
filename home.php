@@ -4,10 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no">
-<!-- <link rel="stylesheet" href="./css/style.css"> -->
-<link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1/slick/slick.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1/slick/slick-theme.min.css">
 <title>タイトル</title>
 <meta name="description" content="ディスクリプション">
 <!-- <link rel="icon" href="./img/favicon.ico"> -->
@@ -122,7 +118,7 @@
 <div id="contents">
   <div class="inner">
 
-    <main>
+	<main>
 			<section class="leading">
 				<div class="inner">
 					<h2 class="ttll"></h2>
@@ -141,7 +137,7 @@
 					<p class="txt"></p>
 				</div>
 			</section>
-    </main><!-- primary -->
+	</main><!-- primary -->
 
 		<aside>
 		</aside><!-- /secondary -->
@@ -174,12 +170,6 @@
 	</div><!-- /gfooter-bottom -->
 </footer><!-- /footer -->
 
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1/slick/slick.min.js"></script>
-
 <script type="text/javascript">
 	$(function() {
 		$(".mv-slider").slick({
@@ -194,9 +184,6 @@
 		});
 	});
 </script>
-<!-- <script src="./js/script.js"></script> -->
-
 <?php wp_footer(); ?>
 </body>
 </html>
-SAVE TO CACHER
