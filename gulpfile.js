@@ -62,7 +62,7 @@ task("sass", function() {
 task("watch", function(done) {
 	browserSync.init({
 		files: ["./**/*.php"],
-		proxy: "http://sample.wp/",
+		proxy: "http://sample01.wp/",
 		open: true, // Gulp起動時にproxyで設定したURLのサイトを自動的に開くことを許可
 		reloadDelay: 2000　// リロードに2秒Delay
 	});
